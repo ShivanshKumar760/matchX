@@ -12,7 +12,7 @@ const userSchema=new mongoose.Schema({
   gender_identity: { type: String },
   gender_interest: { type: String },
   email: { type: String, required: true, unique: true },
-  image_url: { type: String},
+  url: { type: String},
   about: { type: String},
   matches: [
     {

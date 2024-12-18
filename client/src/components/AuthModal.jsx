@@ -34,6 +34,7 @@ const AuthModal=({setShowModal,setIsSignUp,isSignUp})=>{
             {
                 navigate("/dashboard");
             }
+            window.location.reload();
         }
          catch (error) {
             console.log(error);

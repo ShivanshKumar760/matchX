@@ -191,6 +191,7 @@ const OnBoarding=()=>{
                         type="url"
                         name="url"
                         id="url"
+                        value={formData.url}
                         onChange={handleChange}
                         required={true}
                     />

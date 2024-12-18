@@ -86,9 +86,23 @@ app.post("/login",async (req,res)=>{
     }
 });
 
+app.get("/user",async (req,res)=>{
+    const userId=req.query.userId;
+    console.log(userId);
+    try{
+        const query={user_id:userId};
+        const user=await userCollection.findOne(query);
+        res.send(user);
+    }catch(err)
+    {
+        console.log(err);
+    }
 
+})
 app.patch("/user",async (req,res)=>{
     const formData=req.body.formData;
+    console.log("This is patch!");
+    console.log(formData);
     try {
         const query={user_id:formData.user_id};
         const updateDocument = {
