@@ -85,6 +85,32 @@ app.post("/login",async (req,res)=>{
         console.log(err);
     }
 });
+
+
+app.patch("/user",async (req,res)=>{
+    const formData=req.body.formData;
+    try {
+        const query={user_id:formData.user_id};
+        const updateDocument = {
+            $set: {
+                first_name: formData.first_name,
+                dob_day: formData.dob_day,
+                dob_month: formData.dob_month,
+                dob_year: formData.dob_year,
+                show_gender: formData.show_gender,
+                gender_identity: formData.gender_identity,
+                gender_interest: formData.gender_interest,
+                url: formData.url,
+                about: formData.about,
+                matches: formData.matches
+            },
+        }
+        const updatedUser=await userCollection.updateOne(query,updateDocument);
+        res.send(updatedUser);
+    } catch (error) {
+        console.log(error);
+    }
+})
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log("Database connected!");

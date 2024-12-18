@@ -1,8 +1,13 @@
 import { useState } from "react"
 import Navbar from "../components/Navbar"
+import {useCookies} from "react-cookie";
+import axios from 'axios'
+import {useNavigate} from "react-router-dom"
 const OnBoarding=()=>{
+    const [cookies,setCookie,removeCookie]=useCookies(["user"]);
+    const navigate=useNavigate();
     const [formData, setFormData] = useState({
-        user_id: "",
+        user_id: cookies.UserId,
         first_name: "",
         dob_day: "",
         dob_month: "",
@@ -15,8 +20,19 @@ const OnBoarding=()=>{
         matches: []
 
     })
-    const handleSubmit=(e)=>{
+    const handleSubmit=async (e)=>{
         console.log("Submitted!");
+        e.preventDefault();
+        try {
+           const response = await axios.patch("http://localhost:3000/user",{formData});
+           const success=response.status==200;
+           if(success)
+           {
+                navigate("/dashboard");
+           }
+        } catch (error) {
+            
+        }
     };
 
     
@@ -162,7 +178,7 @@ const OnBoarding=()=>{
                             name="about"
                             required={true}
                             placeholder="I like long walks..."
-                            value={""}
+                            value={formData.about}
                             onChange={handleChange}
                         />
 
