@@ -223,7 +223,7 @@ nav .logo-container .logo {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
 }
 
 .swipe {
@@ -311,8 +311,8 @@ nav .logo-container .logo {
 .chat-display,
 .matches-display {
     padding: 20px;
-    height: 60vh;
-    overflow-y: auto;
+    height: 30vh;
+    overflow-y: 0px;
 }
 
 /*-------- Chat Input --------*/
