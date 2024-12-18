@@ -87,7 +87,7 @@ nav .logo-container .logo {
 /*-------- Home page --------*/
 .overlay {
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     position: fixed;
     background: linear-gradient(
             to bottom,
@@ -207,7 +207,8 @@ nav .logo-container .logo {
 }
 
 .onboarding form .photo-container img {
-    width: 100%
+    width: 100%;
+    height: 90%;
 }
 
 /*-------- Dashboard  --------*/
@@ -222,7 +223,7 @@ nav .logo-container .logo {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
 }
 
 .swipe {
