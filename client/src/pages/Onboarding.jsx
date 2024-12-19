@@ -37,15 +37,15 @@ const OnBoarding=()=>{
 
     
     const handleChange=(e)=>{
-        console.log("Change!");
+        // console.log("Change!");
         const name=e.target.name;
         const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
 
-        console.log("name:"+name,"value:"+value);
+        // console.log("name:"+name,"value:"+value);
         setFormData((prevState)=>{
             return {...prevState, [name]: value};
         });
-        console.log(formData);
+        // console.log(formData);
     }
     return(
         <>

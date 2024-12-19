@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import AuthModal from "../components/AuthModal";
 import { useState } from "react";
-const Home=()=>{
+const Home=({userCookie})=>{
     let [showModal,setShowModal]=useState(false);
     const[isSignUp,setIsSignUp]=useState(true)
     const authToken=false;

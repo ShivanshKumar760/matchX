@@ -6,16 +6,33 @@ import bcrypt, { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 import cors from "cors";
 import userCollection from "./models/userCollection.js";
+import messageCollection from "./models/messageCollection.js";
 dotenv.config();
 const app=express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-app.get("/",(req,res)=>{
-    userCollection.find()
-    .then((result)=>{
-        res.send(result);
-    })
+app.get("/users",async (req,res)=>{
+    console.log("Aggregate Pipeline in Process");
+    const userIds=JSON.parse(req.query.userIds);
+    console.log(userIds);
+    const pipeline =
+    [
+        {
+            '$match': {
+                'user_id': {
+                    '$in': userIds
+                }
+            }
+        }
+    ]
+try {
+   const foundUsers=await userCollection.aggregate(pipeline);
+   console.log("Aggregate pipeline found user are:",foundUsers);
+   res.send(foundUsers);
+} catch (error) {
+    console.log(error);
+}
 })
 
 app.post("/signup",async (req,res)=>{
@@ -26,10 +43,10 @@ app.post("/signup",async (req,res)=>{
     {
        password=password.toString();
     }   
-    console.log(typeof password);
+    // console.log(typeof password);
     const hashedPassword=await bcrypt.hash(password,saltRound);
-    console.log(hashedPassword);
-    console.log(typeof hashedPassword);
+    // console.log(hashedPassword);
+    // console.log(typeof hashedPassword);
     try {
         const existingUser=await userCollection.findOne({email});
         if(existingUser)
@@ -44,7 +61,7 @@ app.post("/signup",async (req,res)=>{
         };
         const newUser=new userCollection(data);
         const insertUser=await userCollection.create(newUser);
-        console.log(insertUser);
+        console.log("Inserted Data is :",insertUser);
         const payload={insertUser,sanitizedEmail};
         const maxAge = 3 * 24 * 60 * 60;
         const token=jwt.sign(payload,process.env.JWT_SECRET,{
@@ -88,7 +105,7 @@ app.post("/login",async (req,res)=>{
 
 app.get("/user",async (req,res)=>{
     const userId=req.query.userId;
-    console.log(userId);
+    console.log("Received user id is :",userId);
     try{
         const query={user_id:userId};
         const user=await userCollection.findOne(query);
@@ -101,7 +118,7 @@ app.get("/user",async (req,res)=>{
 })
 app.patch("/user",async (req,res)=>{
     const formData=req.body.formData;
-    console.log("This is patch!");
+    console.log("This is patch method !");
     console.log(formData);
     try {
         const query={user_id:formData.user_id};
@@ -124,7 +141,67 @@ app.patch("/user",async (req,res)=>{
     } catch (error) {
         console.log(error);
     }
-})
+});
+
+app.get("/gendered-users",async (req,res)=>{
+    const {gender}=req.query;
+    console.log("Gender interest is :",gender);
+    try {
+        const query={gender_identity:{$eq:gender}};
+        const foundUser=await userCollection.find(query);
+        console.log("This the found users that belong to this gender:",foundUser);
+        res.send(foundUser);
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+app.patch("/addMatch",async (req,res)=>{
+    console.log("Request comming to add match");
+    const {userId,matchedUserId}=req.body;
+    console.log(userId,matchedUserId);
+    try {
+        const query={user_id:userId};
+        const patchedDocument={
+            $push:{matches:{user_id:matchedUserId}}
+        };
+
+        const user=await userCollection.updateOne(query,patchedDocument);
+        console.log(user);
+        res.send(user);
+    } catch (error) {
+        console.log(error);
+    }
+
+});
+
+
+app.get("/messages",async (req,res)=>{
+    const {userId, correspondingUserId} = req.query
+    try{
+        const query = {
+            from_userId: userId, to_userId: correspondingUserId
+        }
+        const foundMessages=await messageCollection.find(query);
+        console.log("Found messages are :",foundMessages);
+        res.send(foundMessages);
+    }catch(error){
+        console.log(error);
+    }
+});
+
+app.post("/message",async (req,res)=>{
+    const message=req.body.message;
+    try {
+        const newMessage=new messageCollection(message);
+        const result=await messageCollection.create(newMessage);
+        res.send(result);
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 mongoose.connect(process.env.MONGO_URL)
 .then(()=>{
     console.log("Database connected!");

@@ -26,15 +26,18 @@ const AuthModal=({setShowModal,setIsSignUp,isSignUp})=>{
             setCookie("Email",response.data.email);
             setCookie("UserId",response.data.userId);
             setCookie("AuthToken",response.data.token);
-            if(success&&isSignUp)
-            {
-                navigate("/onboarding");
-            }
-            if(success&& !isSignUp)
-            {
-                navigate("/dashboard");
-            }
-            window.location.reload();
+            // if(success&&isSignUp)
+            // {
+            //     navigate("/onboarding");
+            // }
+            // if(success&& !isSignUp)
+            // {
+            //     navigate("/dashboard");
+            // }
+            if (success && isSignUp) navigate ('/onboarding')
+            if (success && !isSignUp) navigate ('/dashboard')
+
+            window.location.reload()
         }
          catch (error) {
             console.log(error);
