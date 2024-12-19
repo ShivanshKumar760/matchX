@@ -7,17 +7,25 @@ import { useCookies } from 'react-cookie';
 function App() {
   const [count, setCount] = useState(0)
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
-  const authToken=cookies.AuthToken
+  const authToken=cookies.AuthToken;
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-            
-            <Route path="/" element={<Home/>}/>
-            {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
-            {authToken && <Route path="/onboarding" element={<OnBoarding/>}/>}
-        </Routes>
-      </BrowserRouter>
+     <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        
+        {/* Protected routes */}
+        {authToken ? (
+          <>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/onboarding" element={<OnBoarding />} />
+          </>
+        ) : (
+          // Redirect to home or login if not authenticated
+          <Route path="/dashboard" element={<Navigate to="/" />} />
+        )}
+      </Routes>
+    </BrowserRouter>
     </>
   )
 }
