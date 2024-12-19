@@ -9,17 +9,15 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const authToken=cookies.AuthToken;
   return (
-    <>
-      <BrowserRouter>
+    <BrowserRouter>
         <Routes>
-            
             <Route path="/" element={<Home/>}/>
-            <Route path="/dashboard" element={<Dashboard/>}/>
-            <Route path="/onboarding" element={<OnBoarding/>}/>
+            {authToken && <Route path="/dashboard" element={<Dashboard/>}/>}
+            {authToken && <Route path="/onboarding" element={<OnBoarding/>}/>}
+
         </Routes>
-      </BrowserRouter>
-    </>
-  )
+    </BrowserRouter>
+)
 }
 
-export default App
+export default App;
