@@ -7,7 +7,7 @@ MatchX is an open-source dating platform that mimics the core features of Tinder
 - **Match and Chat**: If both users swipe right on each other, they are matched and can start chatting.
 - **User Profiles**: Users can create and update their profiles with a photo, bio, and more.
 - **Authentication**: JWT-based authentication for secure login and session management.
-- **Real-time Messaging**: Powered by **WebSockets** for live chat between matched users.
+
 
 ---
 
@@ -21,7 +21,7 @@ MatchX is an open-source dating platform that mimics the core features of Tinder
   - NoSQL database for storing user data, messages, and matches.
 - **Authentication**: JSON Web Tokens (JWT)
   - For user authentication and maintaining secure sessions.
-- **WebSockets**: Real-time messaging between matched users.
+
   
 ---
 
@@ -58,4 +58,27 @@ MatchX is an open-source dating platform that mimics the core features of Tinder
 
 1. Navigate to the `frontend` directory:
    ```bash
-   cd frontend
+   cd client
+2. Install dependencies:
+   ```bash
+   npm install or npm i or pnpm install
+3. Run the React server:
+   ```bash
+   npm run dev or pnpm run dev
+
+## Backend Setup:
+
+1. Navigate to the `frontend` directory:
+   ```bash
+   cd server
+2. Install dependencies:
+   ```bash
+   npm install or npm i or pnpm install
+3. Populate the .env file for mongodb connection:
+   ```bash
+     MONGO_URI=<Your MongoDB URI>
+    JWT_SECRET=<Your JWT Secret Key>
+    PORT=8000
+4. Run the express server:
+   ```bash
+   node index.js
