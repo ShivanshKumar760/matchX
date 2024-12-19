@@ -25,7 +25,7 @@ const OnBoarding=()=>{
         console.log("Submitted!");
         e.preventDefault();
         try {
-           const response = await axios.patch("http://localhost:3000/user",{formData});
+           const response = await axios.patch("https://matchx.onrender.com/user",{formData});
            const success=response.status==200;
            if(success)
            {
