@@ -10,9 +10,7 @@ function App() {
   const authToken=cookies.AuthToken;
   return (
     <>
-    <Hey>
-      Error Line
-    </Hey>
+    
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home/>}/>
