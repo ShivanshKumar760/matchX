@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import {useCookies} from "react-cookie";
 import axios from 'axios'
 import {useNavigate} from "react-router-dom"
+//This file has links
 const OnBoarding=()=>{
     const [cookies,setCookie,removeCookie]=useCookies(["user"]);
     const navigate=useNavigate();

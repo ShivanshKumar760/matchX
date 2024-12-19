@@ -1,6 +1,6 @@
 import { useState} from 'react'
 import axios from 'axios'
-
+//This file has a  link
 const ChatInput = ({ user, clickedUser, getUserMessages, getClickedUsersMessages }) => {
     const [textArea, setTextArea] = useState("")
     const userId = user?.user_id

@@ -12,7 +12,7 @@ const AuthModal=({setShowModal,setIsSignUp,isSignUp})=>{
     const handleClick=()=>{
         setShowModal(false);
     }
-
+    //This file has a  link
     const handleSubmit=async (e)=>{
         e.preventDefault();
         try {
