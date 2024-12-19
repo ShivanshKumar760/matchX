@@ -1,3 +1,4 @@
+![MatchX Logo](images/logo.png)
 # MatchX - Open Source Tinder-like Platform
 
 MatchX is an open-source dating platform that mimics the core features of Tinder. Users can swipe right to express interest and left to reject. When two users swipe right on each other, they are matched and can start chatting. MatchX is built with modern technologies to provide a smooth and interactive user experience.
