@@ -21,7 +21,7 @@ const AuthModal=({setShowModal,setIsSignUp,isSignUp})=>{
                     return;
             }
             console.log("Make a post request to our database!");
-            const response=await axios.post(`http://localhost:3000/${isSignUp?'signup':'login'}`,{email:email,password:password});
+            const response=await axios.post(`https://matchx.onrender.com/${isSignUp?'signup':'login'}`,{email:email,password:password});
             const success=response.status==201;
             setCookie("Email",response.data.email);
             setCookie("UserId",response.data.userId);

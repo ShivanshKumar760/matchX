@@ -27,7 +27,7 @@ const Dashboard=()=>{
     //   ]
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/user', {
+            const response = await axios.get('https://matchx.onrender.com/user', {
                 params: {userId}
             })
             setUser(response.data)
@@ -37,7 +37,7 @@ const Dashboard=()=>{
     };
     const getGenderedUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/gendered-users', {
+            const response = await axios.get('https://matchx.onrender.com/gendered-users', {
                 params: {gender: user?.gender_interest}//if user exist find gender_interest
             })
             setGenderedUsers(response.data)
@@ -64,7 +64,7 @@ const Dashboard=()=>{
     const updateMatches= async (matchedUserId)=>{
         console.log("Called");
         try {
-            const response=await axios.patch("http://localhost:3000/addMatch",{userId,matchedUserId});
+            const response=await axios.patch("https://matchx.onrender.com/addMatch",{userId,matchedUserId});
             console.log(response.data);
             getUser();
         } catch (error) {

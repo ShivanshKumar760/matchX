@@ -15,7 +15,7 @@ const ChatInput = ({ user, clickedUser, getUserMessages, getClickedUsersMessages
         }
 
         try {
-            await axios.post('http://localhost:3000/message', { message })
+            await axios.post('https://matchx.onrender.com/message', { message })
             getUserMessages()
             getClickedUsersMessages()
             setTextArea("")
