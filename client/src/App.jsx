@@ -9,8 +9,6 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(['user']);
   const authToken=cookies.AuthToken;
   return (
-    <>
-    
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home/>}/>
@@ -19,7 +17,6 @@ function App() {
 
         </Routes>
     </BrowserRouter>
-    </>
 )
 }
 
