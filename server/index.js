@@ -33,8 +33,7 @@ try {
 } catch (error) {
     console.log(error);
 }
-})
-
+});
 app.post("/signup",async (req,res)=>{
     const saltRound=10;
     const {email,password}=req.body;
